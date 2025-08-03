@@ -24,7 +24,8 @@ jobs:
         run: echo "REPO_LOWER=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         # add end
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
+        #uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
@@ -57,9 +58,9 @@ jobs:
           cd gitops
           
           if [[ "$OSTYPE" == "darwin"* ]]; then
-            sed -i '' "s|image: ghcr.io/${{ github.repository }}:.*|image: ghcr.io/${{ github.repository }}:${{ github.sha }}|g" deployment.yaml
+            sed -i "s|image: ghcr.io/${{ env.REPO_LOWER }}:.*|image: ghcr.io/${{ env.REPO_LOWER }}:${{ github.sha }}|g" deployment.yaml
           else
-            sed -i "s|image: ghcr.io/${{ github.repository }}:.*|image: ghcr.io/${{ github.repository }}:${{ github.sha }}|g" deployment.yaml
+            sed -i '' "s|image: ghcr.io/${{ env.REPO_LOWER }}:.*|image: ghcr.io/${{ env.REPO_LOWER }}:${{ github.sha }}|g" deployment.yaml
           fi
           
           # Commit changes
@@ -70,4 +71,4 @@ jobs:
           
           # Push
           #git push -f https://${GIT_TOKEN}@github.com/rslim087a/grade-api-gitops.git main
-          git push -f https://${GIT_TOKEN}@github.com/BadraAlou/my-cicd-config.git main
+          git push -f https://${GIT_TOKEN}@github.com/${{ env.REPO_LOWER }}/my-cicd-config.git main
