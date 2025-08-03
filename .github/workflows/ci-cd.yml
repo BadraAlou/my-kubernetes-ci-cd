@@ -18,10 +18,10 @@ jobs:
           password: ${{ secrets.CR_PAT }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        # new add
+       
       - name: Set lowercase owner name
         run: echo "OWNER_LC=${{ github.repository_owner,, }}" >> $GITHUB_ENV
-        # end new add
+        
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
