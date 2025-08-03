@@ -30,6 +30,7 @@ jobs:
           #tags: |
             #ghcr.io/${{ github.repository }}:latest
             #ghcr.io/${{ github.repository }}:${{ github.sha }}
+            # ddd
           tags: |
             ghcr.io/${{ github.repository_owner }}:latest
             ghcr.io/${{ github.repository_owner }}:${{ github.sha }}
