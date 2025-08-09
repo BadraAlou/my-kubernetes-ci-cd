@@ -26,8 +26,8 @@ jobs:
         run: echo "REPO_LOWER=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         # add end
       - name: Build and push Docker image
-        #uses: docker/build-push-action@v4
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v4
+        #uses: docker/build-push-action@v5
         with:
           context: .
           push: true
@@ -44,6 +44,7 @@ jobs:
             #ghcr.io/github.com/badraalou/my-kubernetes-ci-cd:latest
             #ghcr.io/github.com/badraalou/my-kubernetes-ci-cd:${{ github.sha }}
             # 
+            #  
             
       - name: Update GitOps repository
         shell: bash
